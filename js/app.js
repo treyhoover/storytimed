@@ -1,7 +1,7 @@
 (function() {
     var app = angular.module('storytimed', []);
 
-    app.directive('gameContainer', ['$http', function($http){
+    app.directive('gameContainer', function(){
         return {
             controllerAs: 'game',
             restrict: 'E',
@@ -13,9 +13,9 @@
                 }
             }
         }
-    }]);
+    });
 
-    app.controller('StoryController', function(){
+    app.controller('StoryController', ['$http', function($http){
         this.point = {};
 
         this.addPoint = function(story) {
@@ -29,5 +29,5 @@
             {author: 'Andy', body: 'Little did they know, their lives would soon be at stake.'},
             {author: 'Emily', body: 'And so it began: The Coder Games.'}
         ]
-    });
+    }]);
 })();
