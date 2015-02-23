@@ -1,0 +1,13 @@
+{
+  "name": "storytimed",
+  "version": "0.0.0",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
