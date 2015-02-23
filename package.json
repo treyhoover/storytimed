@@ -1,0 +1,25 @@
+{
+  "name": "storytimed",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "angular": "^1.3.13",
+    "express": "^4.12.0",
+    "jade": "^1.9.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/treyhoover/storytimed.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/treyhoover/storytimed/issues"
+  },
+  "homepage": "https://github.com/treyhoover/storytimed"
+}
