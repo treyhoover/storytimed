@@ -1,0 +1,26 @@
+[
+  {
+    "storyId": 1,
+    "author": "Trey",
+    "body": "Once upon a time there was a group of aspiring developers.",
+    "timestamp": "Tue Feb 24 2015 13:30:03 GMT-0500 (EST)"
+  },
+  {
+    "storyId": 1,
+    "author": "Aurora",
+    "body": "They thought they were signing up for code school, but they were signing up for so much more.",
+    "timestamp": "Tue Feb 24 2015 13:31:03 GMT-0500 (EST)"
+  },
+  {
+    "storyId": 1,
+    "author": "Andy",
+    "body": "Little did they know, their lives would soon be at stake.",
+    "timestamp": "Tue Feb 24 2015 13:32:03 GMT-0500 (EST)"
+  },
+  {
+    "storyId": 1,
+    "author": "Emily",
+    "body": "And so it began: The Coder Games.",
+    "timestamp": "Tue Feb 24 2015 13:33:03 GMT-0500 (EST)"
+  }
+]

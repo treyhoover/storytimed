@@ -1,3 +1,20 @@
 .players {
     margin: 0.2em;
 }
+
+ul.story {
+    list-style: none;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.story li {
+    display: inline;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    margin-bottom: 5px;
+}

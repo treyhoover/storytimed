@@ -30,6 +30,7 @@
                 },
                 data: {
                     storyPoint: {
+                        storyId: this.point.storyId || 1,
                         author: this.point.author || 'anonymous',
                         body: this.point.body || ''
                     }
@@ -43,8 +44,9 @@
             });
         };
 
-        $http.get('/api/story/1')
+        $http.get('/api/story/show/1')
             .success(function(response){
+                //console.log("Successfully fetched story points", response.storyPoints);
                 story.points = response.storyPoints;
             });
     }]);
