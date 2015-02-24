@@ -1,21 +1,20 @@
-<h1>{{game.settings.title}}</h1>
-<hr/>
-<span id="players"><strong>Players: </strong>
-    <ul class="players" ng-repeat="player in game.settings.players">
-        <li>{{player}}</li>
-    </ul>
-</span>
-<hr/>
-<div class="story-container" ng-controller="StoryController as storyCtrl">
-    <ul class="story" ng-repeat="storyPoint in storyCtrl.points">
-        <li>{{storyPoint.body}}</li>
-    </ul>
-    <ul class="story">
-        <li>{{storyCtrl.point.body}}</li>
-    </ul>
-<hr/>
-    <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">
-        <textarea ng-model="storyCtrl.point.body" name="storyPoint" rows="10"></textarea>
-        <input type="submit"/>
-    </form>
+<div class="container story-container" ng-controller="StoryController as storyCtrl">
+    <aside class="players" id="players"><h1>Players </h1>
+        <ul class="players-list">
+            <li ng-repeat="player in game.settings.players">{{player}}</li>
+        </ul>
+    </aside>
+    <div class="main">
+        <h1 class="story-title">{{game.settings.title}}</h1>
+        <ul class="story">
+            <li ng-repeat="storyPoint in storyCtrl.points">{{storyPoint.body}}</li>
+        </ul>
+        <ul class="story">
+            <li>{{storyCtrl.point.body}}</li>
+        </ul>
+        <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">
+            <textarea ng-model="storyCtrl.point.body" name="storyPoint" rows="5"></textarea>
+            <input class="btn btn-success" type="submit"/>
+        </form>
+    </div>
 </div>

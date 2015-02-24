@@ -1,12 +1,58 @@
-.players {
-    margin: 0.2em;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #333;
+    min-width: 480px;
+}
+
+aside.players {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    float: left;
+    padding: 2em;
+    height: 100%;
+    background: #eee;
+}
+
+.story-container {
+    padding: 0;
+    position: relative;
+    height: 100%;
+    background: #fff;
+    width: 100%;
+    float: left;
+}
+
+.story-container .main {
+    padding: 2em;
+    height: 100%;
+    margin-left: 200px;
+}
+
+h1 {
+    margin: 0 0 0.5em 0;
+}
+
+h1.story-title {
+    text-align: left;
+}
+
+ul.players-list {
+    position: relative;
+    list-style: none;
+    padding-left: 0.5em;
+    margin-bottom: 0.1em;
 }
 
 ul.story {
     list-style: none;
     display: inline;
-    margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 .story li {
@@ -16,5 +62,11 @@ ul.story {
 textarea {
     resize: none;
     width: 100%;
-    margin-bottom: 5px;
+    margin: 5px 0;
+}
+
+form[name="storyForm"] {
+    margin-top: 1em;
+    text-align: center;
+    position: relative;
 }
