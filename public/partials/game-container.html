@@ -1,13 +1,16 @@
 <h1>{{game.settings.title}}</h1>
+<hr/>
 <span id="players"><strong>Players: </strong>
     <ul class="players" ng-repeat="player in game.settings.players">
         <li>{{player}}</li>
     </ul>
 </span>
+<hr/>
 <div class="story-container" ng-controller="StoryController as storyCtrl">
     <ul class="story" ng-repeat="storyPoint in storyCtrl.points">
         <li>{{storyPoint.body}}</li>
     </ul>
+<hr/>
     <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">
         <textarea ng-model="storyCtrl.point.body" name="storyPoint" rows="10"></textarea>
         <input type="submit"/>

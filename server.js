@@ -1,4 +1,15 @@
 var express = require('express');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/storytimed');
+
+var storyPointSchema = {
+    author:String,
+    body:String
+};
+
+var StoryPoint = mongoose.model('StoryPoint', storyPointSchema, 'storypoints');
+
 var bodyParser = require('body-parser');
 var path = require('path');
 var app = express();
@@ -19,24 +30,21 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api/story/:id', function(req, res) {
-    // req.params.id returns :id
-    res.json({
-        storyPoints: [
-            {author: 'Trey', body: 'Once upon a time there was a group of aspiring developers.'},
-            {author: 'Aurora', body: 'They thought they were signing up for code school, but they were signing up for so much more.'},
-            {author: 'Andy', body: 'Little did they know, their lives would soon be at stake.'},
-            {author: 'Emily', body: 'And so it began: The Coder Games.'}
-        ]
-    });
+    //var storyId = req.params.id;
+    StoryPoint.find(function(err, doc) {
+        res.json({
+            storyPoints: doc
+        });
+    })
 });
 
 app.post('/api/story/add', function(req, res){
-    var storyPoint = req.body;
+    var storyPoint = req.body.storyPoint;
     console.log(storyPoint);
     res.status(200).end(JSON.stringify({success: "Successfully added"}));
     //res.status(400).end(JSON.stringify({error: "Error adding entry"}));
 });
 
 var server = app.listen(3000, function () {
-    console.log('listening at http://localhost:3000');
+    console.log('Server running on http://localhost:3000');
 });

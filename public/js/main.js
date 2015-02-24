@@ -31,7 +31,7 @@
                 data: {
                     storyPoint: {
                         author: this.point.author || 'anonymous',
-                        body: this.point.body
+                        body: this.point.body || ''
                     }
                 },
             }).success(function (data, status, headers, config) {
