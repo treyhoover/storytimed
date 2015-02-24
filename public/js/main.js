@@ -3,7 +3,6 @@
 
     app.directive('gameContainer', function(){
         return {
-            controllerAs: 'game',
             restrict: 'E',
             templateUrl: 'partials/game-container.html',
             controller: function(){
@@ -11,23 +10,43 @@
                     title: "The Coder Games",
                     players: ['Trey', 'Aurora', 'Andy', 'Emily']
                 }
-            }
+            },
+            controllerAs: 'game'
         }
     });
 
     app.controller('StoryController', ['$http', function($http){
+        var story = this;
+
         this.point = {};
 
         this.addPoint = function(story) {
+            $http({
+                url: '/api/story/add',
+                method: "POST",
+                dataType: 'json',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: {
+                    storyPoint: {
+                        author: this.point.author || 'anonymous',
+                        body: this.point.body
+                    }
+                },
+            }).success(function (data, status, headers, config) {
+                console.log(data);
+            }).error(function (data, status, headers, config) {
+                console.log(data);
+            });
+
             story.points.push(this.point);
             this.point = {};
         };
 
-        this.points = [
-            {author: 'Trey', body: 'Once upon a time there was a group of aspiring developers.'},
-            {author: 'Aurora', body: 'They thought they were signing up for code school, but they were signing up for so much more.'},
-            {author: 'Andy', body: 'Little did they know, their lives would soon be at stake.'},
-            {author: 'Emily', body: 'And so it began: The Coder Games.'}
-        ]
+        $http.get('/api/story/1')
+            .success(function(response){
+                story.points = response.storyPoints;
+            });
     }]);
 })();
