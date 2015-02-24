@@ -39,10 +39,16 @@ app.get('/api/story/:id', function(req, res) {
 });
 
 app.post('/api/story/add', function(req, res){
-    var storyPoint = req.body.storyPoint;
-    console.log(storyPoint);
-    res.status(200).end(JSON.stringify({success: "Successfully added"}));
-    //res.status(400).end(JSON.stringify({error: "Error adding entry"}));
+    var newStoryPoint = new StoryPoint(req.body.storyPoint);
+    //console.log(storyPoint);
+    newStoryPoint.save(function(err, newStoryPoint){
+        if (err) {
+            res.status(400).end(JSON.stringify({error: "Error adding entry"}));
+            return console.error(err);
+        } else {
+            res.status(200).end(JSON.stringify({success: "Successfully added"}));
+        }
+    });
 });
 
 var server = app.listen(3000, function () {

@@ -36,8 +36,8 @@
                 }
             }).success(function (data, status, headers, config) {
                 console.log(data);
-                story.points.push(this.point);
-                this.point = {};
+                story.points.push(story.point);
+                story.point = {};
             }).error(function (data, status, headers, config) {
                 console.log(data);
             });
