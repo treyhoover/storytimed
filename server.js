@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
     res.setHeader('Content-Type', 'text/html');
-    res.render('index', { title: 'Storytimed', message: 'Hello there!'});
+    res.render('index', { title: 'Storytimed' });
 });
 
 app.get('/api/story/:id', function(req, res) {
