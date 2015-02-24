@@ -36,12 +36,11 @@
                 }
             }).success(function (data, status, headers, config) {
                 console.log(data);
+                story.points.push(this.point);
+                this.point = {};
             }).error(function (data, status, headers, config) {
                 console.log(data);
             });
-
-            story.points.push(this.point);
-            this.point = {};
         };
 
         $http.get('/api/story/1')
