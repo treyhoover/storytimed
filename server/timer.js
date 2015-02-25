@@ -18,7 +18,7 @@ module.exports = function(app, io) {
         };
     };
 
-    var timer = new Timer(5000);
+    var timer = new Timer(35000);
     timer.start();
 
 };
