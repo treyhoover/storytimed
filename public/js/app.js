@@ -22,7 +22,7 @@
                 var self = this;
                 this.settings = {
                     title: "The Coder Games",
-                    players: ['Trey', 'Aurora', 'Andy', 'Emily'],
+                    players: [],
                     activePlayer: false
                 };
                 socket.on('change players', function(round){
@@ -39,6 +39,16 @@
                         $scope.$apply();
                         console.log(players[pI] + ' is up!');
                     }
+                });
+                socket.on('add player', function(player, players){
+                   console.log(player + ' has joined the room!');
+                    self.settings.players = players;
+                    $scope.$apply();
+                });
+                socket.on('remove player', function(player, players){
+                    console.log(player + ' has left the room!');
+                    self.settings.players = players;
+                    $scope.$apply();
                 });
             }],
             controllerAs: 'game'
