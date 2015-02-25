@@ -20,6 +20,7 @@ var StoryPoint = mongoose.model('StoryPoint', storyPointSchema, 'storypoints');
 
 var bodyParser = require('body-parser');
 var path = require('path');
+
 var app = express();
 
 app.set('view engine', 'jade');
