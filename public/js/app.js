@@ -7,10 +7,17 @@
             restrict: 'E',
             templateUrl: 'partials/game-container.html',
             controller: function(){
+                var self = this;
                 this.settings = {
                     title: "The Coder Games",
                     players: ['Trey', 'Aurora', 'Andy', 'Emily']
                 }
+                socket.on('change players', function(round){
+                    console.log('change players', 'round ' + round);
+                    var players = self.settings.players;
+                    var pI = parseInt(round) % players.length;
+                    console.log(players[pI] + ' is up!');
+                });
             },
             controllerAs: 'game'
         }
@@ -28,10 +35,6 @@
             //console.log('last story point:', story.points[story.points.length - 1]);
             $scope.$apply();
             $('.story').scrollTop($('.story')[0].scrollHeight);
-        });
-
-        socket.on('change players', function(msg){
-            console.log('change players', 'round ' + msg);
         });
 
         this.addPoint = function(story) {
