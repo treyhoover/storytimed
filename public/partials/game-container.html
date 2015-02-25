@@ -10,7 +10,7 @@
         <h1 class="story-title">{{game.settings.title}}</h1>
         <ul class="story">
             <li ng-repeat="storyPoint in storyCtrl.points"><p>{{storyPoint.body}}</p></li>
-            <li><p>{{storyCtrl.point.body}}</p></li>
+            <!--<li><p>{{storyCtrl.point.body}}</p></li>-->
         </ul>
         <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">
             <textarea ng-model="storyCtrl.point.body" name="storyPoint" rows="5"></textarea>

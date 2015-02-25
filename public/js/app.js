@@ -16,15 +16,17 @@
         }
     });
 
-    app.controller('StoryController', ['$http', function($http){
+    app.controller('StoryController', ['$http', '$scope', function($http, $scope){
         var story = this;
 
         this.username = "anonymous";
         this.point = {};
 
         socket.on('new storyPoint', function(msg){
-            console.log('new storyPoint!', msg);
+            //console.log('new storyPoint!', msg);
             story.points.push(msg);
+            console.log('last story point:', story.points[story.points.length - 1]);
+            $scope.$apply();
             $('.story').scrollTop($('.story')[0].scrollHeight);
         });
 
@@ -44,7 +46,7 @@
                     }
                 }
             }).success(function (data, status, headers, config) {
-                console.log(data);
+                //console.log(data);
                 //story.points.push(story.point);
                 story.point = {};
             }).error(function (data, status, headers, config) {
