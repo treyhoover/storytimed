@@ -25,9 +25,13 @@
         socket.on('new storyPoint', function(msg){
             //console.log('new storyPoint!', msg);
             story.points.push(msg);
-            console.log('last story point:', story.points[story.points.length - 1]);
+            //console.log('last story point:', story.points[story.points.length - 1]);
             $scope.$apply();
             $('.story').scrollTop($('.story')[0].scrollHeight);
+        });
+
+        socket.on('change players', function(msg){
+            console.log('change players', 'round ' + msg);
         });
 
         this.addPoint = function(story) {

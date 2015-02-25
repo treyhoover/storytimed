@@ -1,10 +1,4 @@
-module.exports = function(app) {
-    var socket = require('socket.io');
-    var http = require('http');
-    var httpServer = http.createServer(app);
-
-    var http = require('http');
-    var io = socket.listen(httpServer);
+module.exports = function(app, io) {
 
     io.on('connection', function(socket){
         console.log('a user connected');
@@ -13,7 +7,7 @@ module.exports = function(app) {
         });
     });
 
-    httpServer.listen(8000);
+    //socketServer.listen(8000);
 
     var mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/storytimed');

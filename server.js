@@ -1,3 +1,8 @@
+var http = require('http');
+var socket = require('socket.io');
+var socketServer = http.createServer(app);
+var io = socket.listen(socketServer);
+
 var express = require('express');
 
 var app = express();
@@ -15,8 +20,11 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-var routes = require('./config/routes')(app);
+var routes = require('./config/routes')(app, io);
+var timer = require('./server/timer')(app, io);
 
 var server = app.listen(3000, function () {
     console.log('Server running on http://localhost:3000');
 });
+
+socketServer.listen(8000);
