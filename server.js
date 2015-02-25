@@ -1,7 +1,21 @@
+var socket = require('socket.io');
 var express = require('express');
-var mongoose = require('mongoose');
+var http = require('http');
 
+var app = express();
+var httpServer = http.createServer(app);
+
+var io = socket.listen(httpServer);
+
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/storytimed');
+
+io.on('connection', function(socket){
+   console.log('a user connected');
+    socket.on('disconnect', function(){
+       console.log('user disconnected');
+    });
+});
 
 var storySchema = {
     title: {type: String, default: 'untitled'},
@@ -20,8 +34,6 @@ var StoryPoint = mongoose.model('StoryPoint', storyPointSchema, 'storypoints');
 
 var bodyParser = require('body-parser');
 var path = require('path');
-
-var app = express();
 
 app.set('view engine', 'jade');
 
@@ -76,6 +88,7 @@ app.post('/api/story/add', function(req, res){
             res.status(400).end(JSON.stringify({error: "Error adding entry"}));
             return console.error(err);
         } else {
+            io.emit('new storyPoint', newStoryPoint,{ for: 'everyone' });
             res.status(200).end(JSON.stringify({success: "Successfully added"}));
         }
     });
@@ -84,3 +97,5 @@ app.post('/api/story/add', function(req, res){
 var server = app.listen(3000, function () {
     console.log('Server running on http://localhost:3000');
 });
+
+httpServer.listen(8000);

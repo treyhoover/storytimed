@@ -1,5 +1,6 @@
 (function() {
     var app = angular.module('storytimed', []);
+    var socket = io.connect('http://localhost:8000');
 
     app.directive('gameContainer', function(){
         return {
@@ -21,6 +22,11 @@
         this.username = "anonymous";
         this.point = {};
 
+        socket.on('new storyPoint', function(msg){
+            console.log('new storyPoint!', msg);
+            story.points.push(msg);
+        });
+
         this.addPoint = function(story) {
             $http({
                 url: '/api/story/add',
@@ -38,7 +44,7 @@
                 }
             }).success(function (data, status, headers, config) {
                 console.log(data);
-                story.points.push(story.point);
+                //story.points.push(story.point);
                 story.point = {};
             }).error(function (data, status, headers, config) {
                 console.log(data);
