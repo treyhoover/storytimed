@@ -1,6 +1,18 @@
 (function() {
     var app = angular.module('storytimed', []);
-    var socket = io.connect('http://localhost:8000');
+
+    $.urlParam = function(name){
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results==null){
+            return null;
+        }
+        else{
+            return results[1] || 0;
+        }
+    };
+
+    var username = $.urlParam("user");
+    var socket = io.connect('http://localhost:8000', {query: 'user=' + username});
 
     app.directive('gameContainer', function(){
         return {
@@ -18,7 +30,7 @@
                     var players = self.settings.players;
                     var pI = parseInt(round) % players.length;
 
-                    if (players[pI] == 'Trey') {
+                    if (players[pI] == username) {
                         self.settings.activePlayer = true;
                         $scope.$apply();
                         console.log('You\'re up!');
