@@ -6,19 +6,29 @@
         return {
             restrict: 'E',
             templateUrl: 'partials/game-container.html',
-            controller: function(){
+            controller: ['$scope', function($scope){
                 var self = this;
                 this.settings = {
                     title: "The Coder Games",
-                    players: ['Trey', 'Aurora', 'Andy', 'Emily']
-                }
+                    players: ['Trey', 'Aurora', 'Andy', 'Emily'],
+                    activePlayer: false
+                };
                 socket.on('change players', function(round){
-                    console.log('change players', 'round ' + round);
+                    //console.log('change players', 'round ' + round);
                     var players = self.settings.players;
                     var pI = parseInt(round) % players.length;
-                    console.log(players[pI] + ' is up!');
+
+                    if (players[pI] == 'Trey') {
+                        self.settings.activePlayer = true;
+                        $scope.$apply();
+                        console.log('You\'re up!');
+                    } else {
+                        self.settings.activePlayer = false;
+                        $scope.$apply();
+                        console.log(players[pI] + ' is up!');
+                    }
                 });
-            },
+            }],
             controllerAs: 'game'
         }
     });
