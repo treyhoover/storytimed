@@ -18,6 +18,10 @@ aside.players {
     background: #eee;
 }
 
+.players input[name="username"] {
+    margin-bottom: 0.5em;
+}
+
 .story-container {
     padding: 0;
     position: relative;
@@ -50,13 +54,16 @@ ul.players-list {
 
 ul.story {
     list-style: none;
-    display: inline;
+    display: inline-block;
     padding: 0;
     height: 100%;
+    max-height: 500px;
+    overflow: scroll;
 }
 
 .story li {
     display: inline;
+    word-break: break-all;
 }
 
 textarea {

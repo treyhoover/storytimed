@@ -1,6 +1,8 @@
 <div class="container story-container" ng-controller="StoryController as storyCtrl">
     <aside class="players" id="players"><h1>Players </h1>
+        <input name="username" type="text" ng-model="storyCtrl.username"/>
         <ul class="players-list">
+            <li>{{storyCtrl.username}}</li>
             <li ng-repeat="player in game.settings.players">{{player}}</li>
         </ul>
     </aside>
@@ -8,8 +10,6 @@
         <h1 class="story-title">{{game.settings.title}}</h1>
         <ul class="story">
             <li ng-repeat="storyPoint in storyCtrl.points">{{storyPoint.body}}</li>
-        </ul>
-        <ul class="story">
             <li>{{storyCtrl.point.body}}</li>
         </ul>
         <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">

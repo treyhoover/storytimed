@@ -18,6 +18,7 @@
     app.controller('StoryController', ['$http', function($http){
         var story = this;
 
+        this.username = "anonymous";
         this.point = {};
 
         this.addPoint = function(story) {
@@ -31,7 +32,7 @@
                 data: {
                     storyPoint: {
                         storyId: this.point.storyId || 1,
-                        author: this.point.author || 'anonymous',
+                        author: story.username || '',
                         body: this.point.body || ''
                     }
                 }
