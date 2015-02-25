@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 var routes = require('./config/routes')(app, io);
 var timer = require('./server/timer')(app, io);
 
-var server = app.listen(5000, function () {
+var server = app.listen(process.env.PORT || 5000, function () {
     console.log('Server running on *:5000');
 });
 
