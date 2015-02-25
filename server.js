@@ -1,11 +1,7 @@
-var http = require('http');
-var socket = require('socket.io');
-var socketServer = http.createServer(app);
-var io = socket.listen(socketServer);
-
 var express = require('express');
-
 var app = express();
+var serv = require('http').createServer(app);
+var io = require('socket.io').listen(serv);
 
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -23,8 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 var routes = require('./config/routes')(app, io);
 var timer = require('./server/timer')(app, io);
 
-var server = app.listen(process.env.PORT || 5000, function () {
-    console.log('Server running on *:5000');
+serv.listen(process.env.PORT || 5000, function () {
+    console.log('Server running on *:' + (process.env.PORT || '5000'));
 });
-
-socketServer.listen(8000);

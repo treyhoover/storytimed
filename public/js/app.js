@@ -12,7 +12,7 @@
     };
 
     var username = $.urlParam("user");
-    var socket = io.connect('http://localhost:8000', {query: 'user=' + username});
+    var socket = io.connect({query: 'user=' + username});
 
     app.directive('gameContainer', function(){
         return {
