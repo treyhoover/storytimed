@@ -17,10 +17,9 @@ module.exports = function(app, io) {
         });
     });
 
-    //socketServer.listen(8000);
-
     var mongoose = require('mongoose');
-    mongoose.connect('mongodb://localhost/storytimed');
+    var uri = process.env.MONGOLAB_URI || 'mongodb://localhost/storytimed';
+    mongoose.connect(uri);
 
     var storySchema = {
         title: {type: String, default: 'untitled'},
