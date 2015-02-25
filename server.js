@@ -72,7 +72,7 @@ app.post('/api/story/add', function(req, res){
     var newStoryPoint = new StoryPoint(req.body.storyPoint);
     console.log(newStoryPoint);
     newStoryPoint.save(function(err, newStoryPoint){
-        if (err) {
+        if (err || newStoryPoint.body.length < 1 || newStoryPoint.author.length < 1) {
             res.status(400).end(JSON.stringify({error: "Error adding entry"}));
             return console.error(err);
         } else {
