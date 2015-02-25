@@ -25,6 +25,7 @@
         socket.on('new storyPoint', function(msg){
             console.log('new storyPoint!', msg);
             story.points.push(msg);
+            $('.story').scrollTop($('.story')[0].scrollHeight);
         });
 
         this.addPoint = function(story) {

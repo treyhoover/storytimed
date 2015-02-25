@@ -63,7 +63,7 @@ ul.story {
 
 .story li {
     display: inline;
-    word-break: break-all;
+    word-wrap: break-word;
 }
 
 textarea {
