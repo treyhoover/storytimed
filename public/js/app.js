@@ -75,7 +75,7 @@
     app.controller('StoryController', ['$http', '$scope', function($http, $scope){
         var story = this;
 
-        this.username = "anonymous";
+        this.username = username;
         this.point = {};
 
         socket.on('new storyPoint', function(msg){
