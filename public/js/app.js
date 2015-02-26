@@ -30,6 +30,9 @@
                     var players = self.settings.players;
                     var pI = parseInt(round) % players.length;
 
+                    $('.players ul').children().removeClass('active');
+                    $('.players ul').children().eq(pI).addClass('active');
+
                     if (players[pI] == username) {
                         self.settings.activePlayer = true;
                         $scope.$apply();
@@ -48,7 +51,7 @@
                 });
                 socket.on('remove player', function(player, players){
                     console.log(player + ' has left the room!');
-                    if (self.settings.player.length == 1) self.settings.activePlayer = true;
+                    if (self.settings.players.length == 1) self.settings.activePlayer = true;
                     self.settings.players = players;
                     $scope.$apply();
                 });
