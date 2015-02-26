@@ -1,24 +1,23 @@
-module.exports = function(app, io) {
+module.exports = function() {
 
     var Timer = function(interval){
-        var self = this;
         this.round = 0;
         this.interval = interval;
         this.intervalId = null;
-        this.intervalAction = function(){
+        this.changePlayer = function(){
             //console.log("I'm running every " + interval/1000 + " seconds!");
-            self.round += 1;
-            io.emit('change players', self.round, { for: 'everyone' });
-        };
+            this.round += 1;
+            this.stop();
+            this.start();
+            return this.round;
+        }.bind(this);
         this.start = function() {
-            this.intervalId = setInterval(this.intervalAction, interval);
+            this.intervalId = setInterval(this.changePlayer, interval);
         };
         this.stop = function() {
           clearInterval(this.intervalId);
         };
     };
 
-    var timer = new Timer(35000);
-    timer.start();
-
+    return Timer;
 };
