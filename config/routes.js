@@ -7,6 +7,11 @@ module.exports = function(app, io) {
         console.log(user + ' connected');
         players.push(user);
         io.emit('add player', user, players,{ for: 'everyone' });
+
+        socket.on('activePlayerName', function(name){
+            io.emit('set activePlayer', name, { for: 'everyone'});
+        });
+
         socket.on('disconnect', function(){
             console.log(user + ' disconnected');
             var index = players.indexOf(user);

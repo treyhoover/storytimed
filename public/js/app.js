@@ -23,12 +23,16 @@
                 this.settings = {
                     title: "The Coder Games",
                     players: [],
-                    activePlayer: false
+                    activePlayer: false,
+                    activePlayerName: ''
                 };
                 socket.on('change players', function(round){
                     //console.log('change players', 'round ' + round);
                     var players = self.settings.players;
                     var pI = parseInt(round) % players.length;
+
+                    self.settings.activePlayerName = players[pI];
+                    socket.emit('activePlayerName', players[pI]);
 
                     $('.players ul').children().removeClass('active');
                     $('.players ul').children().eq(pI).addClass('active');
@@ -43,17 +47,20 @@
                         console.log(players[pI] + ' is up!');
                     }
                 });
+                socket.on('set activePlayer', function(player){
+                   //console.log('server set active player:', player);
+                });
                 socket.on('add player', function(player, players){
-                   console.log(player + ' has joined the room!');
+                    console.log(player + ' has joined the room!');
                     self.settings.players = players;
-                    if (self.settings.players.length == 1) self.settings.activePlayer = true;
                     $scope.$apply();
+                    if (self.settings.players.length == 1) self.settings.activePlayer = true;
                 });
                 socket.on('remove player', function(player, players){
                     console.log(player + ' has left the room!');
-                    if (self.settings.players.length == 1) self.settings.activePlayer = true;
                     self.settings.players = players;
                     $scope.$apply();
+                    if (self.settings.players.length == 1) self.settings.activePlayer = true;
                 });
             }],
             controllerAs: 'game'
