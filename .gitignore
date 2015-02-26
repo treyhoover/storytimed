@@ -1,1 +1,15 @@
 .idea/workspace.xml
+*~
+*.swp
+target
+.project
+.classpath
+.settings
+.buildpath
+.DS_Store
+.metadata
+.idea
+*.pem
+*.iml
+.iml
+AwsCredentials.properties
