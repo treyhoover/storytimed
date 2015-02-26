@@ -78,3 +78,13 @@ form[name="storyForm"] {
     text-align: center;
     position: relative;
 }
+
+.players li.active {
+    font-weight: bold;
+    background-color: yellow;
+}
+
+.btn-success[disabled] {
+    background-color: darkred;
+    border-color: darkred
+}
