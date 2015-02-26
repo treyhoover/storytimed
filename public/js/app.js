@@ -12,6 +12,11 @@
     };
 
     var username = $.urlParam("user");
+
+    if (!username) {
+        username = prompt('What\'s your name?', '');
+    }
+
     var socket = io.connect({query: 'user=' + username});
 
     app.directive('gameContainer', function(){
