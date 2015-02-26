@@ -43,10 +43,12 @@
                 socket.on('add player', function(player, players){
                    console.log(player + ' has joined the room!');
                     self.settings.players = players;
+                    if (self.settings.players.length == 1) self.settings.activePlayer = true;
                     $scope.$apply();
                 });
                 socket.on('remove player', function(player, players){
                     console.log(player + ' has left the room!');
+                    if (self.settings.player.length == 1) self.settings.activePlayer = true;
                     self.settings.players = players;
                     $scope.$apply();
                 });
