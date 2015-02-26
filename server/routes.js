@@ -3,10 +3,6 @@ var StoryPoint = require('./controllers/storypoint.controller');
 
 module.exports = function(app, io) {
 
-    var mongoose = require('mongoose');
-    var uri = process.env.MONGOLAB_URI || 'mongodb://localhost/storytimed';
-    mongoose.connect(uri);
-
     app.get('/', function(req, res) {
         res.setHeader('Content-Type', 'text/html');
         res.render('index', { title: 'Storytimed' });
