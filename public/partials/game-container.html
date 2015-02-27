@@ -5,7 +5,7 @@
         </ul>
     </aside>
     <main>
-        <h1 class="story-title">{{game.settings.title}}</h1>
+        <div class="row title-container"><h1 class="story-title">{{game.settings.title}}</h1></div>
         <div class="row story-container">
             <ul class="story">
                 <li ng-repeat="storyPoint in storyCtrl.points"><p>{{storyPoint.body}}</p></li>
@@ -13,7 +13,7 @@
         </div>
         <div class="row form-container">
             <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">
-                <input class="editor" type="text" ng-model="storyCtrl.point.body" name="storyPoint"></input>
+                <textarea class="editor" type="text" ng-model="storyCtrl.point.body" name="storyPoint"></textarea>
                 <input class="btn btn-success" ng-disabled="!game.settings.clientIsActive" type="submit" value="Submit {{game.settings.clientIsActive ? '(' + game.settings.timeRemaining + ')' : ''}}"/>
             </form>
         </div>
