@@ -57,6 +57,12 @@ ul.players-list {
     margin-bottom: 0.1em;
 }
 
+ul.players-list li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 ul.story {
     list-style: none;
     display: inline-block;
