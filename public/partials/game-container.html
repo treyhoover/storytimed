@@ -3,7 +3,7 @@
         <!--<input name="username" type="text" ng-model="storyCtrl.username"/>-->
         <ul class="players-list">
             <!--<li>{{storyCtrl.username}}</li>-->
-            <li ng-class="{active: player.active}" ng-repeat="player in game.settings.players">{{player.name}}</li>
+            <li ng-class="{active: player.active}" ng-repeat="player in game.settings.players">{{player.name}} <span class="counter"></span></span></li>
         </ul>
     </aside>
     <div class="main">
