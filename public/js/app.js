@@ -29,8 +29,15 @@
                     title: "The Coder Games",
                     players: [],
                     activePlayer: {},
+                    timeRemaining: 1,
                     clientIsActive: false
                 };
+                socket.on('time_remaining', function(timeRemaining){
+                    //console.log('time remaining', timeRemaining);
+                    self.settings.timeRemaining = timeRemaining;
+                    $('.players.active').append($(' <span>()</span>'));
+                    $scope.$apply();
+                });
                 socket.on('new_round', function(round, players, playerIndex){
 
                     var activePlayer = _.find(players, function(player){
@@ -49,7 +56,7 @@
                     } else {
                         self.settings.clientIsActive = false;
                         $scope.$apply();
-                        console.log(players[playerIndex].name + ' is up!');
+                        console.log(players[playerIndex].name + ' is up!', self.settings.timeRemaining);
                     }
                 });
                 socket.on('add_player', function(player, players){

@@ -14,7 +14,7 @@
         </ul>
         <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">
             <textarea ng-model="storyCtrl.point.body" name="storyPoint" rows="5"></textarea>
-            <input class="btn btn-success" ng-disabled="!game.settings.clientIsActive" type="submit"/>
+            <input class="btn btn-success" ng-disabled="!game.settings.clientIsActive" type="submit" value="Submit {{game.settings.clientIsActive ? '(' + game.settings.timeRemaining + ')' : ''}}"/>
         </form>
     </div>
 </div>

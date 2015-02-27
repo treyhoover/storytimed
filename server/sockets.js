@@ -5,7 +5,7 @@ module.exports = function(serv) {
     players = [];
     io = socket.listen(serv);
     var Timer = require('./timer')();
-    timer = new Timer(30000);
+    timer = new Timer(5000);
 
     io.on('connection', function(socket){
         var user = socket.handshake.query.user;
