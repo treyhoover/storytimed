@@ -1,5 +1,6 @@
 var socket = require('socket.io');
 var players = [];
+var _ = require('underscore');
 
 module.exports = function(serv) {
     io = socket.listen(serv);
