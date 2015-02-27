@@ -16,9 +16,9 @@ module.exports = function(serv) {
            return player.name;
         });
 
-        // when there's just one player, make that player active
+        // when there's just one player, start the first round and make that player active
         if (players.length == 1) {
-            players[0].active = true;
+            if (!timer.stopped) timer.newRound();
         }
 
         if (players.length <= 1 && !timer.stopped) {
