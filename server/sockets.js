@@ -11,14 +11,18 @@ module.exports = function(serv) {
         var user = socket.handshake.query.user;
         console.log(user + ' connected');
 
+        var playerCountBefore = players.length;
+
         players.push({name: user, active: false});
         players = _.sortBy(players, function(player){
            return player.name;
         });
 
         // when there's just one player, start the first round and make that player active
-        if (players.length == 1) {
-            if (!timer.stopped) timer.newRound();
+        if (playerCountBefore == 0) {
+            timer.start();
+            players[0].active = true;
+            timer.newRound();
         }
 
         if (players.length <= 1 && !timer.stopped) {
@@ -60,8 +64,6 @@ module.exports = function(serv) {
             if (player.active) timer.newRound();
         });
     });
-
-    timer.start();
 
     return io;
 };
