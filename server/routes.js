@@ -1,7 +1,8 @@
 var Story = require('./controllers/story.controller');
 var StoryPoint = require('./controllers/storypoint.controller');
+var sockets = require('./sockets');
 
-module.exports = function(app, io) {
+module.exports = function(app) {
 
     app.get('/', function(req, res) {
         res.setHeader('Content-Type', 'text/html');
@@ -39,6 +40,7 @@ module.exports = function(app, io) {
                 return console.error(err);
             } else {
                 io.emit('new storyPoint', newStoryPoint,{ for: 'everyone' });
+                timer.newRound();
                 res.status(200).end(JSON.stringify({success: "Successfully added"}));
             }
         });

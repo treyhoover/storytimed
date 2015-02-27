@@ -15,7 +15,8 @@ aside.players {
     float: left;
     padding: 2em;
     height: 100%;
-    background: #eee;
+    background: #333;
+    color: #fff;
 }
 
 .players input[name="username"] {
@@ -41,6 +42,10 @@ h1 {
     margin: 0 0 0.5em 0;
 }
 
+.players h1 {
+    text-align: center;
+}
+
 h1.story-title {
     text-align: left;
 }
@@ -48,7 +53,7 @@ h1.story-title {
 ul.players-list {
     position: relative;
     list-style: none;
-    padding-left: 0.5em;
+    padding-left: 0;
     margin-bottom: 0.1em;
 }
 
@@ -79,9 +84,15 @@ form[name="storyForm"] {
     position: relative;
 }
 
+.players li {
+    color: #fff;
+    padding: 0.25em 1em;
+    transition: all 0.5s ease-in-out;
+    border-radius: 2em;
+}
+
 .players li.active {
-    font-weight: bold;
-    background-color: yellow;
+    background-color: #449d44;
 }
 
 .btn-success[disabled] {

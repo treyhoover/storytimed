@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-var routes = require('./server/routes')(app, socket);
+var routes = require('./server/routes')(app);
 
 serv.listen(process.env.PORT || 5000, function () {
     console.log('Server running on *:' + (process.env.PORT || '5000'));

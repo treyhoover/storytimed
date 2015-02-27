@@ -28,38 +28,36 @@
                 this.settings = {
                     title: "The Coder Games",
                     players: [],
-                    activePlayer: false,
-                    activePlayerName: ''
+                    activePlayer: {},
+                    clientIsActive: false
                 };
-                socket.on('change players', function(round){
-                    //console.log('change players', 'round ' + round);
-                    var players = self.settings.players;
-                    var pI = parseInt(round) % players.length;
+                socket.on('new_round', function(round, players, playerIndex){
 
-                    self.settings.activePlayerName = players[pI];
+                    var activePlayer = _.find(players, function(player){
+                        return player.active == true;
+                    });
 
-                    $('.players ul').children().removeClass('active');
-                    $('.players ul').children().eq(pI).addClass('active');
+                    self.settings.activePlayer = activePlayer;
 
-                    if (players[pI] == username) {
-                        self.settings.activePlayer = true;
+                    $('ul.players-list').children().removeClass('active');
+                    $('ul.players-list').children().eq(playerIndex).addClass('active');
+
+                    if (activePlayer.name == username) {
+                        self.settings.clientIsActive = true;
                         $scope.$apply();
                         console.log('You\'re up!');
                     } else {
-                        self.settings.activePlayer = false;
+                        self.settings.clientIsActive = false;
                         $scope.$apply();
-                        console.log(players[pI] + ' is up!');
+                        console.log(players[playerIndex].name + ' is up!');
                     }
                 });
-                socket.on('players', function(players){
-                   console.log('player list', players);
-                });
-                socket.on('add player', function(player, players){
+                socket.on('add_player', function(player, players){
                     console.log(player + ' has joined the room!');
                     self.settings.players = players;
                     $scope.$apply();
                 });
-                socket.on('remove player', function(player, players){
+                socket.on('remove_player', function(player, players){
                     console.log(player + ' has left the room!');
                     self.settings.players = players;
                     $scope.$apply();

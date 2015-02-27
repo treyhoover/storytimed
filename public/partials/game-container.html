@@ -3,7 +3,7 @@
         <!--<input name="username" type="text" ng-model="storyCtrl.username"/>-->
         <ul class="players-list">
             <!--<li>{{storyCtrl.username}}</li>-->
-            <li ng-repeat="player in game.settings.players">{{player.name}}</li>
+            <li ng-class="{active: player.active}" ng-repeat="player in game.settings.players">{{player.name}}</li>
         </ul>
     </aside>
     <div class="main">
@@ -14,7 +14,7 @@
         </ul>
         <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">
             <textarea ng-model="storyCtrl.point.body" name="storyPoint" rows="5"></textarea>
-            <input class="btn btn-success" ng-disabled="!game.settings.activePlayer" type="submit"/>
+            <input class="btn btn-success" ng-disabled="!game.settings.clientIsActive" type="submit"/>
         </form>
     </div>
 </div>
