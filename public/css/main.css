@@ -17,6 +17,7 @@ aside.players {
     padding: 2em;
     background: #333;
     color: #fff;
+    overflow: auto;
 }
 
 .players input[name="username"] {
