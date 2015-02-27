@@ -1,4 +1,4 @@
-# [Storytimed!](http://www.storytimed.herokuapp.com):
+# [Storytimed!](http://storytimed.herokuapp.com):
 ## A collaborative, turn-based, story-writing game.
 
 ## Technologies:
@@ -16,3 +16,4 @@ Join a room and start typing! When it's your turn, only you can add to the story
 ## Setup:
 - ```npm install```
 - ```node server.js```
+- navigate to ```localhost:5000```
