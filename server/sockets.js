@@ -8,7 +8,7 @@ module.exports = function(serv) {
 
         var user = socket.handshake.query.user;
         console.log(user + ' connected');
-        players.push(user);
+        players.push({name: user, active: false});
 
         if (players.length == 0) {
             var round = timer.changePlayer();
@@ -16,10 +16,7 @@ module.exports = function(serv) {
         }
 
         io.emit('add player', user, players,{ for: 'everyone' });
-
-        socket.on('activePlayerName', function(name){
-            io.emit('set activePlayer', name, { for: 'everyone'});
-        });
+        io.emit('players', players, { for: 'everyone'});
 
         socket.on('disconnect', function(){
             console.log(user + ' disconnected');
