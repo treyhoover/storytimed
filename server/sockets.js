@@ -19,10 +19,14 @@ module.exports = function(serv) {
         // when there's just one player, make that player active
         if (players.length == 1) {
             players[0].active = true;
-            io.emit('new_round', timer.round, players, timer.activePlayerIndex, { for: 'everyone' });
+        }
+
+        if (players.length <= 1 && !timer.stopped) {
             timer.stop();
-        } else if (timer.stopped) {
+            console.log("timer stopped:", timer.stopped);
+        } else if (players.length > 1 && timer.stopped) {
             timer.start();
+            console.log("timer stopped:", timer.stopped);
         }
 
         io.emit('add_player', user, players,{ for: 'everyone' });
@@ -39,13 +43,17 @@ module.exports = function(serv) {
                 players.splice(index, 1);
             }
 
+            if (players.length <= 1 && !timer.stopped) {
+                timer.stop();
+                console.log("timer stopped:", timer.stopped);
+            } else if (players.length > 1 && timer.stopped) {
+                timer.start();
+                console.log("timer stopped:", timer.stopped);
+            }
+
             // when there's just one player, make that player active
             if (players.length == 1) {
                 players[0].active = true;
-                io.emit('new_round', this.round, players, { for: 'everyone' });
-                timer.stop();
-            } else if (timer.stopped) {
-                timer.start();
             }
 
             io.emit('remove_player', user, players,{ for: 'everyone' });

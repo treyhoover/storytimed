@@ -40,7 +40,7 @@ module.exports = function(app) {
                 return console.error(err);
             } else {
                 io.emit('new storyPoint', newStoryPoint,{ for: 'everyone' });
-                timer.newRound();
+                if (players.length > 1 ) timer.newRound();
                 res.status(200).end(JSON.stringify({success: "Successfully added"}));
             }
         });

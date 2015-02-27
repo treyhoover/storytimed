@@ -26,8 +26,6 @@ module.exports = function() {
             });
 
             io.emit('new_round', this.round, players, activePlayerIndex, { for: 'everyone' });
-            this.stop();
-            this.start();
             return this.round;
         }.bind(this);
         this.start = function() {
