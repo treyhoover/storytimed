@@ -4,14 +4,18 @@
             <li ng-class="{active: player.active}" ng-repeat="player in game.settings.players">{{player.name}} <span class="counter"></span></span></li>
         </ul>
     </aside>
-    <div class="story-container">
+    <main>
         <h1 class="story-title">{{game.settings.title}}</h1>
-        <ul class="story">
-            <li ng-repeat="storyPoint in storyCtrl.points"><p>{{storyPoint.body}}</p></li>
-        </ul>
-        <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">
-            <textarea ng-model="storyCtrl.point.body" name="storyPoint" rows="5"></textarea>
-            <input class="btn btn-success" ng-disabled="!game.settings.clientIsActive" type="submit" value="Submit {{game.settings.clientIsActive ? '(' + game.settings.timeRemaining + ')' : ''}}"/>
-        </form>
-    </div>
+        <div class="row story-container">
+            <ul class="story">
+                <li ng-repeat="storyPoint in storyCtrl.points"><p>{{storyPoint.body}}</p></li>
+            </ul>
+        </div>
+        <div class="row form-container">
+            <form name="storyForm" ng-submit="storyCtrl.addPoint(storyCtrl)">
+                <input class="editor" type="text" ng-model="storyCtrl.point.body" name="storyPoint"></input>
+                <input class="btn btn-success" ng-disabled="!game.settings.clientIsActive" type="submit" value="Submit {{game.settings.clientIsActive ? '(' + game.settings.timeRemaining + ')' : ''}}"/>
+            </form>
+        </div>
+    </main>
 </div>
