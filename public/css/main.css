@@ -23,7 +23,7 @@ aside.players {
     margin-bottom: 0.5em;
 }
 
-.story-container {
+.app-container {
     padding: 0;
     position: relative;
     height: 100%;
@@ -32,7 +32,7 @@ aside.players {
     float: left;
 }
 
-.story-container .main {
+.app-container .story-container {
     padding: 2em;
     height: 100%;
     margin-left: 200px;
