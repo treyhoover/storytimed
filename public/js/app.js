@@ -57,7 +57,7 @@
                     } else {
                         self.settings.clientIsActive = false;
                         $scope.$apply();
-                        console.log(players[playerIndex].name + ' is up!', self.settings.timeRemaining);
+                        console.log(players[playerIndex].name + ' is up!');
                     }
                 });
                 socket.on('add_player', function(player, players){
