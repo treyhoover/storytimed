@@ -33,7 +33,6 @@
                     clientIsActive: false
                 };
                 socket.on('time_remaining', function(timeRemaining){
-                    //console.log('time remaining', timeRemaining);
                     self.settings.timeRemaining = timeRemaining;
                     $('.players li').not('.active').find($('.counter')).html("");
                     $('.players li.active').find($('.counter')).html("(" + timeRemaining + ")");
