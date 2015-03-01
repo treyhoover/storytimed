@@ -32,11 +32,9 @@ module.exports = function() {
                return player.active;
             });
 
-            var nextActivePlayerIndex = players.indexOf(previousActivePlayer) + 1;
+            var activePlayerIndex = players.indexOf(previousActivePlayer) + 1;
+            if (activePlayerIndex >= players.length) activePlayerIndex = 0;
 
-            nextActivePlayerIndex = (nextActivePlayerIndex >= players.length) ?  0 : nextActivePlayerIndex;
-
-            var activePlayerIndex = nextActivePlayerIndex;
             _.each(players, function(player, index){
                 player.active = (index == activePlayerIndex);
             });

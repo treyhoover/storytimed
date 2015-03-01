@@ -22,7 +22,7 @@
                     activePlayer: {},
                     timeRemaining: 1,
                     clientIsActive: false
-                }
+                };
 
                 socket.on('time_remaining', function(timeRemaining){
                     self.settings.timeRemaining = timeRemaining;
