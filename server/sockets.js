@@ -4,6 +4,7 @@ var _ = require('underscore');
 module.exports = function(serv) {
     players = [];
     io = socket.listen(serv);
+    io.emit('disconnect');
     var Timer = require('./timer')();
     timer = new Timer(30000);
 
@@ -14,9 +15,6 @@ module.exports = function(serv) {
         var playerCountBefore = players.length;
 
         players.push({name: user, active: false});
-        players = _.sortBy(players, function(player){
-           return player.name;
-        });
 
         // when there's just one player, start the first round and make that player active
         if (playerCountBefore == 0) {
