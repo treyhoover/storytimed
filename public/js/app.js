@@ -1,29 +1,23 @@
 (function() {
     var app = angular.module('storytimed', []);
 
-    $.urlParam = function(name){
-        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-        if (results==null){
-            return null;
-        }
-        else{
-            return results[1] || 0;
-        }
-    };
-
-    var username = $.urlParam("user");
-
-    if (!username) {
-        username = prompt('What\'s your name?', '');
-    }
-
-    var socket = io.connect({query: 'user=' + username});
-
     app.directive('gameContainer', function(){
         return {
             restrict: 'E',
             templateUrl: 'partials/game-container.html',
             controller: ['$scope', function($scope){
+                $.urlParam = function(name){
+                    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                    if (results==null){
+                        return null;
+                    }
+                    else{
+                        return results[1] || 0;
+                    }
+                };
+
+                var socket = io.connect({query: 'user=' + $scope.username});
+
                 var self = this;
                 this.settings = {
                     title: "The Coder Games",
@@ -32,6 +26,13 @@
                     timeRemaining: 1,
                     clientIsActive: false
                 };
+
+                $scope.username = $.urlParam("user");
+
+                if (!$scope.username) {
+                    $scope.username = prompt('What\'s your name?', '');
+                }
+
                 socket.on('time_remaining', function(timeRemaining){
                     self.settings.timeRemaining = timeRemaining;
                     $('.players li').not('.active').find($('.counter')).html("");
@@ -49,7 +50,7 @@
                     $('ul.players-list').children().removeClass('active');
                     $('ul.players-list').children().eq(playerIndex).addClass('active');
 
-                    if (activePlayer.name == username) {
+                    if (activePlayer.name == $scope.username) {
                         self.settings.clientIsActive = true;
                         $scope.$apply();
                         console.log('You\'re up!');
@@ -73,44 +74,4 @@
             controllerAs: 'game'
         }
     });
-
-    app.controller('StoryController', ['$http', '$scope', function($http, $scope){
-        var story = this;
-
-        this.username = username;
-        this.point = {};
-
-        socket.on('new storyPoint', function(msg){
-            story.points.push(msg);
-            $scope.$apply();
-            $('.story').scrollTop($('.story')[0].scrollHeight);
-        });
-
-        this.addPoint = function(story) {
-            $http({
-                url: '/api/story/add',
-                method: "POST",
-                dataType: 'json',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                data: {
-                    storyPoint: {
-                        storyId: this.point.storyId || 1,
-                        author: story.username || '',
-                        body: this.point.body || ''
-                    }
-                }
-            }).success(function (data, status, headers, config) {
-                story.point = {};
-            }).error(function (data, status, headers, config) {
-                console.log(data);
-            });
-        };
-
-        $http.get('/api/story/show/1')
-            .success(function(response){
-                story.points = response.storyPoints;
-            });
-    }]);
 })();
