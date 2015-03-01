@@ -1,20 +1,17 @@
 (function() {
     var app = angular.module('storytimed', []);
 
-    app.directive('gameContainer', function(){
+    app.directive('gameContainer', function($location){
         return {
             restrict: 'E',
             templateUrl: 'partials/game-container.html',
             controller: ['$scope', function($scope){
-                $.urlParam = function(name){
-                    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-                    if (results==null){
-                        return null;
-                    }
-                    else{
-                        return results[1] || 0;
-                    }
-                };
+                $scope.username = $location.search().user;
+
+                if (!$scope.username) {
+                    $scope.username = prompt('What\'s your name?', '') || 'Anonymous';
+                    $location.search({user: $scope.username});
+                }
 
                 var socket = io.connect({query: 'user=' + $scope.username});
 
@@ -25,12 +22,6 @@
                     activePlayer: {},
                     timeRemaining: 1,
                     clientIsActive: false
-                };
-
-                $scope.username = $.urlParam("user");
-
-                if (!$scope.username) {
-                    $scope.username = prompt('What\'s your name?', '');
                 }
 
                 socket.on('time_remaining', function(timeRemaining){

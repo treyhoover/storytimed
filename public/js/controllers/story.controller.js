@@ -1,7 +1,4 @@
 angular.module('storytimed').controller('StoryController', ['$http', '$scope', '$location', function($http, $scope, $location){
-    //$location.search('trey');
-
-    //console.log($location.search());
 
     var socket = io.connect({query: 'user=' + $scope.username});
     $scope.point = {};
